@@ -1,0 +1,25 @@
+print("*********CALCULATOR*********")
+x = int(input("Enter the first number"))
+y = int(input("Enter the second number"))
+print("1. the collection process")
+print("2. the extraction process")
+print("3. the multiplication process")
+print("4. the process of splitting")
+print("5. full splitting operation")
+print("6. the process of obtaining the base")
+z = int(input("select the process"))
+
+if (z == 1):
+    print("Result ",int(x+y))
+elif (z == 2):
+    print("Result ",int(x-y))
+elif (z == 3):
+    print("Result ",int(x*y))
+elif (z == 4):
+    print("Result ",int(x/y))
+elif (z == 5):
+    print("Result ",int(x//y))
+elif (z == 6):
+    print("Result ",int(x**y))
+else :
+    print("please select the current transaction")
