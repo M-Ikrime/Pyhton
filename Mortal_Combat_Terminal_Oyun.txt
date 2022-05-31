@@ -1,0 +1,92 @@
+import random
+
+oyuncu1=str(input("      ------İLK KAHRAMAN------"+"\n"+"Lütfen kahramanızın adını yazın:"))
+oyuncu2=str(input("   ------İKİNCİ KAHRAMAN------"+"\n"+"Lütfen kahramanızın adını yazın:"))
+karar = "evet"
+def isim(oyuncu1,oyuncu2):
+    if (oyuncu1 == oyuncu2):
+        print("------",oyuncu1 ," alındı")
+        oyuncu2 = input("Lütfen başka bir isim seçin:")
+        return (isim(oyuncu1, oyuncu2))
+    else :
+        print(oyuncu1,oyuncu2)
+
+
+while (karar == "evet"):
+
+    print(isim(oyuncu1,oyuncu2))
+    yazı_tura=[oyuncu1,oyuncu2]
+    baslayan = random.choice(yazı_tura)
+    if (baslayan == oyuncu1):
+        bekleyen = oyuncu2
+    else :
+        bekleyen = oyuncu1
+
+    print("Yazı tura sonucu", baslayan, "başlar")
+    sopa=("|")
+    saldiran_puani =100
+    magdur_puani =100
+    oyuncu1güç= sopa * 50
+    oyuncu2güç= sopa * 50
+    print(baslayan + " " * 55 + bekleyen + "\n" + "hp" + str(saldiran_puani) + oyuncu1güç + " " * 3 + "hp" + str(magdur_puani) + oyuncu2güç)
+
+    print("-------" + baslayan + " Saldırı-------")
+    def sayi_al():
+        z = int(input("Saldırı büyüklüğünüzü 1-50 arasında seçin :"))
+        return z
+    def sayi_araligi_kontrol(z):
+        if (z < 0 or z > 50):
+            return sayi_araligi_kontrol(sayi_al())
+        else:
+            return z
+    sayi_kontrol = sayi_araligi_kontrol(sayi_al())
+    print(sayi_kontrol)
+    saldiran = baslayan
+    magdur = bekleyen
+
+    while (saldiran_puani > 0 and magdur_puani > 0):
+
+        liste1 = []
+        for i in range(sayi_kontrol):
+            liste1.append(0)
+        for i in range(100 - sayi_kontrol):
+            liste1.append(1)
+        if (random.choice(liste1) == 1):
+            magdur_puani = magdur_puani - (sayi_kontrol * 2)
+
+            if  magdur_puani > 0 :
+                oyuncu2güç= sopa * (50 - sayi_kontrol)
+            print(saldiran ," ", sayi_kontrol,"kadar hasar verdi")
+            print(saldiran +" " * 55 + magdur + "\n" + "hp" + str(saldiran_puani) + oyuncu1güç + " " * 3 + "hp" + str(magdur_puani) + oyuncu2güç)
+
+
+        else :
+            print("Oppsy  " + saldiran +" saldırıyı kaçırdı" + " " * 55 + bekleyen + "\n" + "hp" + str(saldiran_puani) + oyuncu1güç + " " * 3 + "hp" + str(magdur_puani) + oyuncu2güç)
+        gecici = saldiran
+        saldiran = magdur
+        magdur = gecici
+        gecici_puan = saldiran_puani
+        saldiran_puani = magdur_puani
+        magdur_puani = gecici_puan
+        gecici_cubuk = oyuncu1güç
+        oyuncu1güç = oyuncu2güç
+        oyuncu2güç = gecici_cubuk
+        if (saldiran_puani<=0 or magdur_puani<=0):
+            continue
+        else :
+            sayi_kontrol = sayi_araligi_kontrol(sayi_al())
+    print("#" * 50 +"\n" +"#" * 20 + magdur + " kazandı" + "#" * 20 + "\n" + "#" * 50)
+    cevap = input("Bir tur daha oynamak ister misiniz (evet veya hayır)? :")
+    def fonk_cevap(cevap):
+        if (cevap == "evet" or cevap =="hayır" ):
+            if (cevap == "hayır"):
+                print("Oynadığınız için teşekkürler! Tekrar görüşürüz!")
+                karar = "hayır"
+                return karar
+            else :
+                karar = "evet"
+                return karar
+        else:
+            cevap2 = input("Bir tur daha oynamak ister misiniz (evet veya hayır)? :")
+            return fonk_cevap(cevap2)
+    karar = fonk_cevap(cevap)
