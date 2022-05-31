@@ -1,0 +1,63 @@
+a = ("." * 75)
+b = ("         .*.*.*.*.*Welcome to the Interest Calculator.*.*.*.*.*")
+
+print(a, '\n', b, '\n', a, )      #Karşılama ekranı
+
+c = input("Plase enter your name:")
+print(c)
+
+kredi_tutari = float(input("Kredi tutarı : "))
+
+yıllık_faiz_oranı = float(input("Yıllık faiz oranı :  "))
+
+print("-> TIME LENGHT")
+
+maxyıl = int(input("  Yıl : "))
+maxay = int(input("   Ay :"))
+yinara = int(input("  Yineleme oranı:"))
+toplamay = int(maxyıl * 12 + maxay)  #Ay ve Yıl bilgilerini toplam ay sayısı olarak
+
+def print_duration(toplamay):
+    yıl = int(toplamay / 12)
+    ay = int(toplamay % 12)
+
+    return [yıl, ay]
+
+
+
+def print_money(kredi_tutari):
+    money = int(kredi_tutari * 10) / 10
+    return money
+
+def print_entry(kredi_tutari, yıllık_faiz_oranı, yinara, toplamay):
+
+    sart1 = (toplamay/yinara)
+    sart2 = 1
+    sart3 = 3
+    while (sart1>0):
+
+
+
+
+        print("-> year:", int(sart3/12) , "month:" , int(sart3%12)   )
+        ToplamFaiz = int(((kredi_tutari/100) * (yıllık_faiz_oranı/12) * yinara * sart2 ) *10)/10
+        print("Total payment:\n" , ToplamFaiz + print_money(kredi_tutari) , "$" )
+
+        print("Monthly payment:\n" , int(((ToplamFaiz + print_money(kredi_tutari)) / (yinara * sart2))*10)/10 , "$")
+        sart1 -=1
+        sart2 +=1
+        sart3 +=yinara
+        print("----------------------")
+        print("----------------------")
+
+    return ""
+
+def print_full_report(kredi_tutari, yıllık_faiz_oranı, yinara, toplamay):
+    print("Retport for " , c )
+    print("----------------------")
+    print("----------------------")
+    print(print_entry(kredi_tutari, yıllık_faiz_oranı, yinara,toplamay))
+
+    return toplamay
+
+print_full_report(kredi_tutari, yıllık_faiz_oranı,  yinara, toplamay)
